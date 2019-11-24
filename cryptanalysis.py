@@ -25,7 +25,7 @@ def gcd(a, b):
 
 def brent(N):
     if N % 2 == 0:
-        return 2, N / 2
+        return 2, N // 2
     y, c, m = random.randint(1, N - 1), random.randint(1, N - 1), random.randint(1, N - 1)
     g, r, q = 1, 1, 1
     while g == 1:
@@ -48,7 +48,7 @@ def brent(N):
             if g > 1:
                 break
 
-    return g, N / g
+    return g, N // g
 
 def egcd(a, b):
     mod = b
@@ -64,6 +64,7 @@ def egcd(a, b):
 
 def decryptEachWord(e,x,n):
     f = brent(n)
+    #print(f[0], f[1])
     phi = (f[0] - 1) * (f[1] - 1)
     d = egcd(e, phi)[1]
     return encrypt.squareAndMultiply(int(d),x,n)
