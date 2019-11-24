@@ -1,19 +1,9 @@
 import math
 import encrypt
-import textmalnipulation
+import textmal
 import random
 
-'''
-def isPerfectSquare(x): 
-    sr = math.sqrt(x) 
-    return ((sr - math.floor(sr)) == 0) 
 
-def fermatFactoring(n):
-    s = int (math.sqrt(n)) + 1 
-    while isPerfectSquare(s * s - n) == False:
-        s += 1
-    return s - math.sqrt(s*s - n), s + math.sqrt(s*s - n)
-'''
 
 def gcd(a, b):
     a = abs(a)
@@ -62,21 +52,19 @@ def egcd(a, b):
         x += mod
     return gcd, x, y
 
-def decryptEachWord(e,x,n):
+def decrypt_each_word(e,x,n):
     f = brent(n)
-    #print(f[0], f[1])
     phi = (f[0] - 1) * (f[1] - 1)
     d = egcd(e, phi)[1]
-    return encrypt.squareAndMultiply(int(d),x,n)
+    return encrypt.square_and_multiply(int(d),x,n)
     
 def decryption(keyE, cT, keyN):
     f = open("decryptedtext.txt","w")
     hC = []
     for x in cT:
-        t = decryptEachWord(keyE, x, keyN)
+        t = decrypt_each_word(keyE, x, keyN)
         hC.append(t)
-        f.write(str(textmalnipulation.unhashing(t)))
+        f.write(str(textmal.unhashing(t)))
         f.write(' ')
-    
 
 
